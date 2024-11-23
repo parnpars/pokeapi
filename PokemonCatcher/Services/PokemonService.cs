@@ -23,7 +23,7 @@ public class PokemonService(PokeApiService pokeApiService, ApplicationDbContext 
     }
 
     public async Task<PokemonDto> CatchPokemonByNameAsync(string name)
-    { 
+    {
         var validatedName = name.Trim().ToLower();
         
         var pokeExists = await context.Pokemons.FirstOrDefaultAsync(x => x.Name == validatedName) != null;

@@ -13,7 +13,7 @@ public static class ToDtoModel
             Name = pokemonDbModel.Name,
             PokemonId = pokemonDbModel.PokemonId,
             CreatedAt = pokemonDbModel.CreatedAt,
-            Types = types.Select(x => new TypeDto()
+            Types = types.Select(x => new TypeDto
             {
                 Name = x.Type
             }).ToList()
@@ -28,7 +28,7 @@ public static class ToDtoModel
             Name = pokemonDbModel.Name,
             PokemonId = pokemonDbModel.PokemonId,
             CreatedAt = pokemonDbModel.CreatedAt,
-            Types = new List<TypeDto>()
+            Types = new List<TypeDto>
             {
                 new TypeDto()
                 {

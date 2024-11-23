@@ -221,3 +221,4 @@
 /Users/parniaparsa/Documents/poke/pokeapi/PokemonCatcher/obj/Debug/net8.0/PokemonCatcher.pdb
 /Users/parniaparsa/Documents/poke/pokeapi/PokemonCatcher/obj/Debug/net8.0/PokemonCatcher.genruntimeconfig.cache
 /Users/parniaparsa/Documents/poke/pokeapi/PokemonCatcher/obj/Debug/net8.0/ref/PokemonCatcher.dll
+/Users/parniaparsa/Documents/poke/pokeapi/PokemonCatcher/obj/Debug/net8.0/PokemonCatcher.sourcelink.json
