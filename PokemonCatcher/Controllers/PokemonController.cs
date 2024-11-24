@@ -39,13 +39,8 @@ public sealed class PokemonController(IPokemonService pokemonService) : Controll
         }
         catch (PokemonAlreadyCaughtException e)
         {
-            BadRequest(e.Message);
+            return BadRequest(e.Message);
         }
-        catch (Exception)
-        {
-            return StatusCode(500);
-        }
-        return StatusCode(500);
     }
     
     /// <summary>

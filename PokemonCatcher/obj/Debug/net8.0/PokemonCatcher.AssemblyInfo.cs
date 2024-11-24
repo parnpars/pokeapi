@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PokemonCatcher")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3211fbc3865efe96a0594f091433d8597bc7748a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+84c96fcada9b1f197b1c98b3ae9a230899dff06d")]
 [assembly: System.Reflection.AssemblyProductAttribute("PokemonCatcher")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PokemonCatcher")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

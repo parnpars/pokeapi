@@ -30,7 +30,7 @@ public class PokemonService(PokeApiService pokeApiService, ApplicationDbContext 
         if (pokeExists)
             throw new PokemonAlreadyCaughtException($"Pokemon with name {validatedName} has already been caught");
         
-        var pokeApiModel = await pokeApiService.GetPokemonByName(validatedName); 
+        var pokeApiModel = await pokeApiService.GetPokemonByName(validatedName);
         if (pokeApiModel == null)
             throw new PokemonNotFoundException($"Pokemon with name {validatedName} could not be found");
         
@@ -95,35 +95,15 @@ public class PokemonService(PokeApiService pokeApiService, ApplicationDbContext 
     
     private async Task<PokemonDto> SavePokemonAsync(PokeApiModel pokeApiModel)
     {
-        var pokemonDbModel = CreatePokemonDbModel(pokeApiModel);
+        var pokemonDbModel = pokeApiModel.ToPokemonDbModel();
         var pokeEntity = await context.Pokemons.AddAsync(pokemonDbModel);
         await context.SaveChangesAsync();
             
-        var typeRelationships = CreateTypeRelationshipModels(pokeApiModel, pokeEntity.Entity.Id);
+        var typeRelationships = pokeApiModel.ToTypeRelationshipDbModel(pokeEntity.Entity.Id);
         await context.PokemonTypeRelationships.AddRangeAsync(typeRelationships);
         await context.SaveChangesAsync();
             
         return pokeEntity.Entity.ToDto(typeRelationships);
     }
-
-    private PokemonDbModel CreatePokemonDbModel(PokeApiModel pokeApiModel)
-    {
-        return new PokemonDbModel()
-        {
-            Id = Guid.NewGuid(),
-            Name = pokeApiModel.Name,
-            PokemonId = pokeApiModel.PokemonId,
-            CreatedAt = DateTime.UtcNow
-        };
-    }
-
-    private List<TypeRelationshipDbModel> CreateTypeRelationshipModels(PokeApiModel pokeApiModel, Guid id)
-    {
-        return pokeApiModel.Types.Select(x => new TypeRelationshipDbModel()
-        {
-            Id = Guid.NewGuid(),
-            PokemonPK = id,
-            Type = x.Type.Name
-        }).ToList();
-    }
+    
 }
