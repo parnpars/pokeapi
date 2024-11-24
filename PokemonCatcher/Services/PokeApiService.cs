@@ -10,32 +10,22 @@ public class PokeApiService(IConfiguration settings, HttpClient httpClient)
 
     public async Task<PokeApiModel?> GetPokemonById(int pokemonId)
     {
-        try
-        {
             var response = await httpClient.GetAsync($"{baseUrl}pokemon/{pokemonId}");
-
+            if (!response.IsSuccessStatusCode)
+                return null;
             var pokemon = await DeserializeResponseToPokemonApiModel(response);
             return pokemon;
-        }
-        catch (Exception)
-        {
-            throw new PokemonNotFoundException($"Pokemon with id {pokemonId} could not be found");
-        }
-       
+        
     }
     
     public async Task<PokeApiModel?> GetPokemonByName(string name)
     {
-        try
-        {
-            var response = await httpClient.GetAsync($"{baseUrl}pokemon/{name}"); 
+            var response = await httpClient.GetAsync($"{baseUrl}pokemon/{name}");
+            if (!response.IsSuccessStatusCode)
+                return null;
+            
             var pokemon = await DeserializeResponseToPokemonApiModel(response); 
             return pokemon;
-        }
-        catch (Exception)
-        {
-            throw new PokemonNotFoundException($"Pokemon with name {name} could not be found");
-        }
     }
 
     private async Task<PokeApiModel?> DeserializeResponseToPokemonApiModel(HttpResponseMessage response)
