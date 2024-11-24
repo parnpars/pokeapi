@@ -22,11 +22,8 @@ public sealed class PokemonController(IPokemonService pokemonService) : Controll
     {
         try
         {
-            if (body is null)
-                return BadRequest("body is required");
-            
-            if (body.PokemonId == null && string.IsNullOrWhiteSpace(body.Name))
-                return BadRequest("pokemon name is required");
+            if (body is null || (body.PokemonId == null && string.IsNullOrWhiteSpace(body.Name)))
+                return BadRequest("pokemon name or id is required");
             
             var pokemon = body.PokemonId.HasValue
                 ? await pokemonService.CatchPokemonByIdAsync(body.PokemonId.Value)
